@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+}
+
+.slider-track {
+    width: 300px;
+    height: 10px;
+    background: #ddd;
+    position: relative;
+    margin: 20px 0;
+}
+
+#slider-thumb {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: blue;
+    transition: left 0.1s ease;
+}
