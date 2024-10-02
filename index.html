@@ -1,15 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SlideCAPTCHA</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="description" content="A simple slider-based CAPTCHA. Users must follow specific sliding instructions to verify they are human, providing a lightweight alternative to traditional CAPTCHA systems." />
+      <meta name="keywords" content="software developer, python, javascript, react, node.js, portfolio, web development" />
+      <meta name="author" content="https://mgregchi.github.io" />
+      
+      <!-- Open Graph Meta Tags for Social Sharing -->
+      <meta property="og:title" content="SlideCAPTCHA - A simple slider-based CAPTCHA" />
+      <meta property="og:description" content="A simple slider-based CAPTCHA. Users must follow specific sliding instructions to verify they are human, providing a lightweight alternative to traditional CAPTCHA systems." />
+      <meta property="og:image" content="https://mgregchi.github.io/slidecaptcha/images/preview.png" />
+      <meta property="og:url" content="https://mgregchi.github.io/slidecaptcha" />
+      <meta property="og:type" content="website" />
+      
+      <!-- Twitter Card Meta Tags -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@mgregchi" />
+      <meta name="twitter:title" content="SlideCAPTCHA - A simple slider-based CAPTCHA" />
+      <meta name="twitter:description" content="A simple slider-based CAPTCHA. Users must follow specific sliding instructions to verify they are human, providing a lightweight alternative to traditional CAPTCHA systems." />
+      <meta name="twitter:image" content="https://mgregchi.github.io/slidecaptcha/images/preview.png" />
+      <link rel="canonical" href="https://mgregchi.github.io/slidecaptcha" />
+    <title>SlideCAPTCHA - A simple slider-based CAPTCHA</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h2>Slide CAPTCHA</h2>
-        <p id="instruction"></p>
+        <div id="loading-icon" class="loading-icon hidden"></div>
+        <p id="instruction">Fetching instructions...</p>
+        
         <input type="range" id="slider" min="0" max="100" value="0">
         <div class="slider-track">
             <div id="slider-thumb"></div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideCAPTCHA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Slide CAPTCHA</h2>
+        <div id="loading-icon" class="loading-icon hidden"></div>
+        
+        <!-- Display the instructions -->
+        <p id="instruction">Fetching instructions...</p>
+
+        <!-- Sliders -->
+        <div class="slider-container">
+            <input type="range" id="slider-1" min="0" max="100" value="0">
+            <div class="slider-track" id="slider-track-1">
+                <div id="slider-thumb-1"></div>
+            </div>
+            <input type="range" id="slider-2" min="0" max="100" value="0">
+            <div class="slider-track" id="slider-track-2">
+                <div id="slider-thumb-2"></div>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <p id="result"></p>
+        <div id="progress-bar-container" class="hidden">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -2,8 +2,11 @@ const slider = document.getElementById('slider');
 const instructionElement = document.getElementById('instruction');
 const sliderThumb = document.getElementById('slider-thumb');
 const resultElement = document.getElementById('result');
+const loadingIcon = document.getElementById('loading-icon');
 
 let stepIndex = 0;
+let releasedAtCenter = false;
+
 const instructions = [
     'Slide to the end',
     'Slide to the middle',
@@ -11,12 +14,18 @@ const instructions = [
     'Slide to center, release and further to the end'
 ];
 
+// Simulate fetching instructions from server
+function fetchInstruction() {
+    loadingIcon.classList.remove('hidden');
+    setTimeout(() => {
+        loadingIcon.classList.add('hidden');
+        stepIndex = Math.floor(Math.random() * instructions.length);
+        updateInstruction();
+    }, 1000); // Simulate 1 second delay for fetching
+}
+
 function updateInstruction() {
-    if (stepIndex < instructions.length) {
-        instructionElement.textContent = instructions[stepIndex];
-    } else {
-        verifyCaptcha();
-    }
+    instructionElement.textContent = instructions[stepIndex];
 }
 
 function handleSliderChange() {
@@ -28,9 +37,9 @@ function handleSliderRelease() {
     const position = slider.value;
 
     if (isInstructionCompleted(position)) {
-        stepIndex++;
-        resetSlider();
-        updateInstruction();
+        verifyCaptcha();
+    } else {
+        resultElement.textContent = 'Incorrect, try again.';
     }
 }
 
@@ -41,27 +50,41 @@ function isInstructionCompleted(position) {
         case 'Slide to the middle':
             return position == 50;
         case 'Slide to center, release and back to start':
-            return position == 50 && stepIndex > 0;
+            if (position == 50 && !releasedAtCenter) {
+                releasedAtCenter = true;
+                resultElement.textContent = 'Now, slide back to start.';
+                return false;
+            }
+            return position == 0 && releasedAtCenter;
         case 'Slide to center, release and further to the end':
-            return position == 100 && stepIndex > 1;
+            if (position == 50 && !releasedAtCenter) {
+                releasedAtCenter = true;
+                resultElement.textContent = 'Now, slide further to the end.';
+                return false;
+            }
+            return position == 100 && releasedAtCenter;
         default:
             return false;
     }
 }
 
+function verifyCaptcha() {
+    resultElement.textContent = 'Verification successful!';
+    loadingIcon.classList.remove('hidden');
+    setTimeout(() => {
+        loadingIcon.classList.add('hidden');
+        console.log("Captcha passed!");
+    }, 1000); // Simulate server verification delay
+}
+
 function resetSlider() {
     slider.value = 0;
     sliderThumb.style.left = '0%';
+    releasedAtCenter = false;
 }
 
-function verifyCaptcha() {
-    resultElement.textContent = 'Verification successful!';
-    // Call your function here
-    console.log("Captcha passed!");
-}
-
-// Initial instruction
-updateInstruction();
+// Initialize with a random instruction
+fetchInstruction();
 
 slider.addEventListener('input', handleSliderChange);
 slider.addEventListener('mouseup', handleSliderRelease);
