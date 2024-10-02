@@ -88,3 +88,6 @@ fetchInstruction();
 
 slider.addEventListener('input', handleSliderChange);
 slider.addEventListener('mouseup', handleSliderRelease);
+// For touch devices
+slider.addEventListener('touchend', handleSliderRelease);
+
